@@ -4,7 +4,7 @@ include "connection.php";
 
 $result = [];
 
-$candySQL = "SELECT orderid, comments, 'candy' AS classification FROM sweetwater_test where comments like '%candy%'";
+$candySQL = "SELECT orderid, comments, IF(comments like '%candy%', 'candy', IF(comments like '%call%', 'contact purchaser', IF(comments like '%referred%', 'referrals', 'Miscellaneous'))) AS classification FROM sweetwater_test";
 
 $result = $conn->query($candySQL);
 
