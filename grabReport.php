@@ -4,7 +4,9 @@ include "connection.php";
 
 $result = [];
 
-$reportSQL = "SELECT orderid, comments, IF(comments like '%candy%', 'candy', IF(comments like '%call%', 'contact purchaser', IF(comments like '%referred%', 'referrals', 'Miscellaneous'))) AS classification FROM sweetwater_test ORDER BY classification";
+$reportSQL = "SELECT orderid, comments, 
+              IF(comments LIKE '%candy%', 'candy', IF(comments LIKE '%call%', 'contact preferences', IF((comments LIKE '%signature%' OR comments LIKE '%sign%'), 'Delivery Signature', IF(comments LIKE '%referred%', 'referrals', 'Miscellaneous')))) AS classification 
+              FROM sweetwater_test ORDER BY classification";
 
 $result = $conn->query($reportSQL);
 
