@@ -13,8 +13,10 @@ if ($result->num_rows > 0)
         $orderid = $row['orderid'];
         $comment = $row['comments'];
         $insertDateStmt->bind_param("si", $shipment_date, $orderid);
-        $shipment_date_str = preg_replace('#[^\pN/]+#', '', $comment);
-        $shipment_date = date_create_from_format('m/d/y', $shipment_date_str)->format('Y-m-d');
+        preg_match('#\d{1,2}/\d{1,2}/\d{2,4}+#', $comment, $matches);
+        $shipment_date_str = $matches[0];
+        $shipment_date = new DateTime($shipment_date_str);
+        $shipment_date = $shipment_date->format('Y-m-d');
         $status = $insertDateStmt->execute();
     }
 }
