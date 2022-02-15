@@ -2,7 +2,7 @@
 include "connection.php";
 
 $reportSQL = "SELECT orderid, comments, shipdate_expected AS date,
-              IF(comments LIKE '%candy%', 'candy', IF((comments LIKE '%call%' or comments LIKE '%contact%'), 'contact preferences', IF((comments LIKE '%signature%' OR comments LIKE '%sign%'), 'Delivery Signature', IF(comments LIKE '%referred%', 'referrals', 'Miscellaneous')))) AS classification 
+              IF((comments LIKE '%candy%' OR comments LIKE '%smarties%'), 'candy', IF((comments LIKE '%call%' OR comments LIKE '%contact%'), 'contact preferences', IF((comments LIKE '%signature%' OR comments LIKE '%sign%'), 'Delivery Signature', IF(comments LIKE '%referred%', 'referrals', 'Miscellaneous')))) AS classification 
               FROM sweetwater_test ORDER BY classification";
 
 $result = $conn->query($reportSQL);
